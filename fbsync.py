@@ -38,8 +38,6 @@ def init():
 
 def create_album(path):
     album = os.path.basename(path)
-    print album
-    print access_token
     fb.put_object("me","albums",name=album,message="")
 
 def get_album_id(albums,name):
@@ -100,11 +98,9 @@ def persist_token():
 def check_access_token():
     if(access_token == ''):
         server = HTTPServer(('',11235),ServerHandler)
-        print "Opening web browser"
         webbrowser.open_new_tab("http://localhost:11235/")
         while authenticated == False:
             server.handle_request()
-        print "Starting FS Loop"
         start_fs_loop()
     else:
         start_fs_loop()
